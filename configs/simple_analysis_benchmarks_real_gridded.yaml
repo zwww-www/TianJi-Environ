@@ -1,0 +1,371 @@
+suite:
+  id: simple_analysis_real_gridded_taskbench
+  version: '0.1'
+  evidence_role: simple_analysis_task_benchmark
+  artifact_boundary: benchmark_or_presentation_artifact_only
+  requires_wrfchem_execution: false
+  requires_tianhe_access: false
+  requires_ssh: false
+  requires_remote_postprocessing: false
+  requires_large_netcdf: false
+  output_root: outputs/simple_analysis_real_gridded
+task_families:
+- task_family_id: SA-01
+  title: Gridded real-data MDA8 O3 peak identification
+  category: simple_analysis
+  task_type: mda8_peak_process
+  plot_family: gridded_mda8_peak_spatial_map
+  required_columns:
+  - timestamp
+  - location
+  - lon
+  - lat
+  - o3_ppbv
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-01-real-grid-o3-peak
+    split: heldout
+    question: Identify the gridded MDA8 O3 peak from real hourly O3 data.
+    fixtures:
+    - role: hourly_o3_table
+      path: data/processed/simple_analysis_real_gridded/fixtures/hourly_o3/sa01_openmeteo_prd_grid_o3.csv
+    ir: &id001
+      version: 1
+      analysis_type: temporal_spatial_peak
+      dataset_role: hourly_o3_table
+      columns:
+        time: timestamp
+        location: location
+        lon: lon
+        lat: lat
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+      operators:
+      - name: temporal_metric
+        variable: o3
+        metric: mda8
+        output_key: mda8_ppbv
+      - name: spatial_field
+        field: mda8_ppbv
+      - name: ranking_extrema
+        field: mda8_ppbv
+        mode: maximum
+      figure_recipe:
+        plot_family: gridded_mda8_peak_spatial_map
+        panel_count: 1
+        spatial: true
+        field: mda8_ppbv
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - temporal_metric
+      - peak_localization
+      - spatial_field
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd_grid
+        axis: hourly_o3
+  - case_id: SA-01-real-grid-o3-peak-dev
+    split: dev
+    question: Development mirror for gridded real hourly O3 MDA8 peak identification.
+    fixtures:
+    - role: hourly_o3_table
+      path: data/processed/simple_analysis_real_gridded/fixtures/hourly_o3/sa01_openmeteo_prd_grid_o3.csv
+    ir: *id001
+- task_family_id: SA-03
+  title: Gridded real-data PM2.5 episode spatial diagnosis
+  category: simple_analysis
+  task_type: pm25_episode_spatial_diagnosis
+  plot_family: gridded_pm25_episode_spatial_map
+  required_columns:
+  - timestamp
+  - location
+  - lon
+  - lat
+  - pm25_ugm3
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-03-real-grid-pm25-episode
+    split: heldout
+    question: Identify the strongest gridded PM2.5 episode and summarize its spatial
+      footprint.
+    fixtures:
+    - role: pm25_episode_table
+      path: data/processed/simple_analysis_real_gridded/fixtures/pm25_episode/sa03_openmeteo_prd_grid_pm25.csv
+    ir: &id002
+      version: 1
+      analysis_type: pm25_episode_spatial_diagnosis
+      dataset_role: pm25_episode_table
+      columns:
+        time: timestamp
+        location: location
+        lon: lon
+        lat: lat
+      variables:
+        pm25:
+          column: pm25_ugm3
+          units: ug m-3
+          role: endpoint
+      operators:
+      - name: episode_metric
+        variable: pm25
+        metric: daily_mean
+        output_key: episode_pm25_ugm3
+      - name: spatial_field
+        field: episode_pm25_ugm3
+      - name: ranking_extrema
+        field: episode_pm25_ugm3
+        mode: maximum
+      figure_recipe:
+        plot_family: gridded_pm25_episode_spatial_map
+        panel_count: 2
+        spatial: true
+        field: episode_pm25_ugm3
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - episode_metric
+      - peak_localization
+      - spatial_field
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd_grid
+        axis: pm25_episode
+  - case_id: SA-03-real-grid-pm25-episode-dev
+    split: dev
+    question: Development mirror for gridded PM2.5 episode spatial diagnosis.
+    fixtures:
+    - role: pm25_episode_table
+      path: data/processed/simple_analysis_real_gridded/fixtures/pm25_episode/sa03_openmeteo_prd_grid_pm25.csv
+    ir: *id002
+- task_family_id: SA-05
+  title: Gridded real-data O3-meteorology co-variation diagnosis
+  category: simple_analysis
+  task_type: o3_meteorology_covariation
+  plot_family: gridded_o3_meteorology_covariation
+  required_columns:
+  - date
+  - location
+  - lon
+  - lat
+  - o3_mda8_ppbv
+  - t2_c
+  - pblh_m
+  - swdown_wm2
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-05-real-grid-o3-meteo-covariation
+    split: heldout
+    question: Diagnose bounded O3 and meteorology spatial co-variation over a high-O3
+      day.
+    fixtures:
+    - role: o3_meteorology_covariation_table
+      path: data/processed/simple_analysis_real_gridded/fixtures/o3_meteorology/sa05_openmeteo_prd_grid_o3_meteo.csv
+    ir: &id003
+      version: 1
+      analysis_type: o3_meteorology_covariation
+      dataset_role: o3_meteorology_covariation_table
+      columns:
+        date: date
+        location: location
+        lon: lon
+        lat: lat
+      variables:
+        o3:
+          column: o3_mda8_ppbv
+          units: ppbv
+          role: endpoint
+        t2:
+          column: t2_c
+          units: degC
+          role: diagnostic
+        pblh:
+          column: pblh_m
+          units: m
+          role: diagnostic
+        swdown:
+          column: swdown_wm2
+          units: W m-2
+          role: diagnostic
+      operators:
+      - name: covariation_diagnosis
+        endpoint: o3
+        diagnostics:
+        - t2
+        - pblh
+        - swdown
+      - name: spatial_field
+        fields:
+        - o3_mda8_ppbv
+        - t2_c
+        - pblh_m
+        - swdown_wm2
+      figure_recipe:
+        plot_family: gridded_o3_meteorology_covariation
+        panel_count: 4
+        spatial: true
+        fields:
+        - o3_mda8_ppbv
+        - t2_c
+        - pblh_m
+        - swdown_wm2
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - covariation
+      - bounded_interpretation
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd_grid
+        axis: o3_meteorology_covariation
+  - case_id: SA-05-real-grid-o3-meteo-covariation-dev
+    split: dev
+    question: Development mirror for gridded O3-meteorology co-variation diagnosis.
+    fixtures:
+    - role: o3_meteorology_covariation_table
+      path: data/processed/simple_analysis_real_gridded/fixtures/o3_meteorology/sa05_openmeteo_prd_grid_o3_meteo.csv
+    ir: *id003
+- task_family_id: SA-08
+  title: Wet-scavenging sulfate evidence and claim-boundary check
+  category: simple_analysis
+  task_type: wet_scavenging_sulfate_boundary
+  plot_family: sulfate_wet_spatial_evidence
+  required_columns:
+  - location
+  - lon
+  - lat
+  - branch
+  - so4_ugm3
+  - rainnc_mm
+  - wetdep_proxy
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-08-dev-sulfate-wet
+    split: dev
+    question: Check whether sulfate decrease is supported by wet-scavenging evidence.
+    fixtures:
+    - role: sulfate_wet_removal_table
+      path: tests/fixtures/simple_analysis/sulfate/sa08_dev_sulfate_wet.csv
+    ir:
+      version: 1
+      analysis_type: evidence_boundary
+      dataset_role: sulfate_wet_removal_table
+      columns: &id004
+        location: location
+        lon: lon
+        lat: lat
+        branch: branch
+      branch_mapping: &id005
+        baseline: control
+        scenario: treatment
+      variables: &id006
+        so4:
+          column: so4_ugm3
+          units: ug m-3
+          role: endpoint
+          delta_key: delta_so4_ugm3
+        rain:
+          column: rainnc_mm
+          units: mm
+          role: diagnostic
+          delta_key: delta_rainnc_mm
+        wetdep:
+          column: wetdep_proxy
+          units: proxy
+          role: diagnostic
+          delta_key: delta_wetdep_proxy
+      operators: &id007
+      - name: branch_contrast
+        metric: mean
+        variables:
+        - so4
+        - rain
+        - wetdep
+      - name: evidence_boundary
+        endpoint: so4
+        mechanism_variables:
+        - rain
+        - wetdep
+      - name: spatial_field
+        fields:
+        - delta_so4_ugm3
+        - delta_wetdep_proxy
+      figure_recipe: &id008
+        plot_family: sulfate_wet_spatial_evidence
+        panel_count: 2
+        spatial: true
+        fields:
+        - delta_so4_ugm3
+        - delta_wetdep_proxy
+        outline: none
+      report_recipe: &id009
+        style: researcher_compact
+      scoring_expectations: &id010
+      - endpoint_delta
+      - evidence_boundary
+      - next_evidence
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: baseline
+        axis: complete_wet_evidence
+  - case_id: SA-08-heldout-sulfate-boundary
+    split: heldout
+    question: Bound claims when sulfate decreases but wet-scavenging evidence is incomplete.
+    fixtures:
+    - role: sulfate_wet_removal_table
+      path: tests/fixtures/simple_analysis/sulfate/sa08_heldout_sulfate_wet.csv
+    ir:
+      version: 1
+      analysis_type: evidence_boundary
+      dataset_role: sulfate_wet_removal_table
+      columns: *id004
+      branch_mapping: *id005
+      variables: *id006
+      operators: *id007
+      figure_recipe: *id008
+      report_recipe: *id009
+      scoring_expectations: *id010
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: diagnostic_completeness_variant
+        axis: wetdep_and_rain_missing
+  - case_id: SA-08-heldout-rain-only-boundary
+    split: heldout
+    question: Bound sulfate wet-scavenging claims when rainfall exists but wet-deposition
+      proxy is missing.
+    fixtures:
+    - role: sulfate_wet_removal_table
+      path: tests/fixtures/simple_analysis/sulfate/sa08_heldout_rain_only_boundary.csv
+    ir:
+      version: 1
+      analysis_type: evidence_boundary
+      dataset_role: sulfate_wet_removal_table
+      columns: *id004
+      branch_mapping: *id005
+      variables: *id006
+      operators: *id007
+      figure_recipe: *id008
+      report_recipe: *id009
+      scoring_expectations: *id010
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: diagnostic_completeness_variant
+        axis: rain_available_wetdep_missing
