@@ -1,0 +1,11 @@
+case,route,decisions
+H1,Scientist,305
+H1,Executor,161
+H1,Validation,5
+H1,Report,2
+H1,Other,3
+H2,Scientist,5
+H2,Executor,9
+H2,Validation,2
+H2,Report,2
+H2,Other,0
