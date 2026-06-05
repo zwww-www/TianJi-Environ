@@ -1,0 +1,5 @@
+branch,ari_state,nox_setting,main_contrast,public_result_file,notes
+control,off,baseline,reference,branch_results/control_results.json,Reference branch for H1.
+ari_on,on,baseline,ARI effect,branch_results/ari_on_results.json,Tests aerosol-radiation-interaction response under baseline emissions.
+nox_cut,off,approximately 30 percent NOx reduction,NOx-control effect,branch_results/nox_cut_results.json,NOx-cut fraction is an explicit premise of the branch design.
+combined,on,approximately 30 percent NOx reduction,combined ARI and NOx-control effect,branch_results/combined_results.json,Used to compare whether ARI modifies the ozone response under the NOx-cut premise.
