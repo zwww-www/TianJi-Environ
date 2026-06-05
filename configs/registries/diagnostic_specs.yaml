@@ -1,0 +1,504 @@
+version: v1
+description: >
+  Registry-driven diagnostic evidence-loop specs for v2 WRF-Chem validation.
+  Specs are the preferred source of truth for diagnostic identity, aliases,
+  WRF output candidates, postprocess extraction, collector normalization,
+  readiness, and provenance.
+
+defaults:
+  provenance:
+    source: configs/registries/diagnostic_specs.yaml
+    authority_layer: runtime_capability
+    authorship: deterministic_registry
+
+diagnostics:
+  MDA8:
+    aliases: [MDA8, MDA8_O3, O3, o3, ozone, 日最大8小时平均臭氧]
+    kind: derived_metric
+    wrf_names: [o3, O3]
+    derived_from: [O3]
+    units: ppbv
+    aggregation: mda8
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: o3
+      output_name: mda8
+      wrf_names: [o3, O3]
+      scale: 1000.0
+      units: ppbv
+      aggregation: mda8
+      implementation: src/atmoschem_agent/tools/ozone_metrics.py::compute_mda8
+    collector:
+      status: supported
+      output_aliases: [MDA8, MDA8_O3, O3]
+      field_aliases: [mda8, mda8_mean, MDA8]
+    provenance:
+      notes: Shared ozone metric; final calculation must reuse compute_mda8().
+
+  PM25:
+    aliases: [PM25, PM2.5, PM2_5_DRY, pm25]
+    kind: wrfchem_variable
+    wrf_names: [PM2_5_DRY]
+    units: ug/m3
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: PM2_5_DRY
+      output_name: pm25
+      wrf_names: [PM2_5_DRY]
+      scale: 1.0
+      units: ug/m3
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [PM25, PM2_5_DRY]
+      field_aliases: [pm25, pm25_mean, PM2_5_DRY]
+
+  SWDOWN:
+    aliases: [SWDOWN, surface shortwave, shortwave radiation, 短波辐射]
+    kind: wrf_variable
+    wrf_names: [SWDOWN]
+    units: W/m2
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: SWDOWN
+      output_name: swdown
+      wrf_names: [SWDOWN]
+      scale: 1.0
+      units: W/m2
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [SWDOWN]
+      field_aliases: [swdown, swdown_mean, SWDOWN]
+
+  PBLH:
+    aliases: [PBLH, PBL, boundary layer height, 边界层高度]
+    kind: wrf_variable
+    wrf_names: [PBLH]
+    units: m
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: PBLH
+      output_name: pblh
+      wrf_names: [PBLH]
+      scale: 1.0
+      units: m
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [PBLH]
+      field_aliases: [pblh, pblh_mean, PBLH]
+
+  JNO2:
+    aliases: [JNO2, J_NO2, J(NO2), PHOTR_NO2]
+    kind: photolysis_diagnostic
+    wrf_names: [PHOTR_NO2, JNO2]
+    units: s^-1
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: JNO2
+      output_name: jno2
+      wrf_names: [PHOTR_NO2, JNO2]
+      scale: 1.0
+      units: s^-1
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [JNO2, J_NO2, PHOTR_NO2]
+      field_aliases: [jno2, jno2_mean, JNO2]
+
+  J_O1D:
+    aliases: [J_O1D, J(O1D), J_O(1D), PHOTR_O1D]
+    kind: photolysis_diagnostic
+    wrf_names: [PHOTR_O1D, J_O1D]
+    units: s^-1
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: J_O1D
+      output_name: j_o1d
+      wrf_names: [PHOTR_O1D, J_O1D]
+      scale: 1.0
+      units: s^-1
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [J_O1D, J(O1D), PHOTR_O1D]
+      field_aliases: [j_o1d, j_o1d_mean, J_O1D]
+
+  NO:
+    aliases: [NO, nitric oxide]
+    kind: wrfchem_species
+    wrf_names: [no, NO]
+    units: ppbv
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: NO
+      output_name: "no"
+      wrf_names: [no, NO]
+      scale: 1000.0
+      units: ppbv
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [NO]
+      field_aliases: ["no", no_mean, NO]
+
+  NO2:
+    aliases: [NO2, nitrogen dioxide]
+    kind: wrfchem_species
+    wrf_names: [no2, NO2]
+    units: ppbv
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: NO2
+      output_name: no2
+      wrf_names: [no2, NO2]
+      scale: 1000.0
+      units: ppbv
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [NO2]
+      field_aliases: [no2, no2_mean, NO2]
+
+  HCHO:
+    aliases: [HCHO, CH2O, formaldehyde]
+    kind: wrfchem_species
+    wrf_names: [HCHO, CH2O, hcho, ch2o]
+    units: ppbv
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: HCHO
+      output_name: hcho
+      wrf_names: [HCHO, CH2O, hcho, ch2o]
+      scale: 1000.0
+      units: ppbv
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [HCHO, CH2O]
+      field_aliases: [hcho, hcho_mean, HCHO]
+
+  ISOPRENE:
+    aliases: [ISOPRENE, ISOP, isoprene, isop]
+    kind: wrfchem_species
+    wrf_names: [ISOP, isop, ISO, iso]
+    units: ppbv
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: isoprene
+      output_name: isoprene
+      wrf_names: [ISOP, isop, ISO, iso]
+      scale: 1000.0
+      units: ppbv
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [ISOPRENE, ISOP]
+      field_aliases: [isoprene, isoprene_mean, ISOP]
+
+  HCHO_NO2_RATIO:
+    aliases: [HCHO_NO2_RATIO, HCHO_NO2_ratio, HCHO/NO2]
+    kind: derived_metric
+    derived_from: [HCHO, NO2]
+    units: ratio
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: HCHO_NO2_ratio
+      output_name: hcho_no2_ratio
+      derived_from: [HCHO, NO2]
+      units: ratio
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [HCHO_NO2_RATIO, HCHO/NO2]
+      field_aliases: [hcho_no2_ratio, HCHO_NO2_RATIO]
+
+  AOD550:
+    aliases: [AOD550, AOD_550, TAUAER3, aerosol optical depth]
+    kind: wrfchem_variable
+    wrf_names: [AOD550, AOD_550, TAUAER3]
+    units: dimensionless
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: AOD550
+      output_name: aod550
+      wrf_names: [AOD550, AOD_550, TAUAER3]
+      scale: 1.0
+      units: dimensionless
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [AOD550, AOD_550]
+      field_aliases: [aod550, aod550_mean, AOD550]
+
+  T2:
+    aliases: [T2, 2m temperature, 2-meter temperature]
+    kind: wrf_variable
+    wrf_names: [T2]
+    units: K
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: T2
+      output_name: t2
+      wrf_names: [T2]
+      scale: 1.0
+      units: K
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [T2]
+      field_aliases: [t2, t2_mean, T2]
+
+  Q2:
+    aliases: [Q2, 2m humidity, 2-meter water vapor]
+    kind: wrf_variable
+    wrf_names: [Q2]
+    units: kg kg-1
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: Q2
+      output_name: q2
+      wrf_names: [Q2]
+      scale: 1.0
+      units: kg kg-1
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [Q2]
+      field_aliases: [q2, q2_mean, Q2]
+
+  W:
+    aliases: [W, w_component, vertical velocity]
+    kind: wrf_variable
+    wrf_names: [W]
+    units: m s-1
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: W
+      output_name: w
+      wrf_names: [W]
+      scale: 1.0
+      units: m s-1
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [W]
+      field_aliases: [w, w_mean, W]
+
+  BC1:
+    aliases: [BC1, bc1, black carbon, BC aerosol]
+    kind: wrfchem_aerosol_variable
+    wrf_names: [BC1, bc1]
+    units: model_units
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: BC1
+      output_name: bc1
+      wrf_names: [BC1, bc1]
+      scale: 1.0
+      units: model_units
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [BC1, bc1]
+      field_aliases: [bc1, bc1_mean, BC1]
+
+  THETA_850_925_DIFF:
+    aliases: [THETA_850_925_DIFF, theta_850_925_diff]
+    kind: derived_metric
+    derived_from: [T, P, PB]
+    units: K
+    aggregation: daily_mean
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: THETA_850_925_DIFF
+      output_name: theta_850_925_diff
+      derived_from: [T, P, PB]
+      units: K
+      aggregation: daily_mean
+    collector:
+      status: supported
+      output_aliases: [THETA_850_925_DIFF]
+      field_aliases: [theta_850_925_diff, theta_850_925_diff_mean, THETA_850_925_DIFF]
+
+  CLDFRA:
+    aliases: [CLDFRA, CLOUD_FRAC, cloud fraction]
+    kind: wrf_variable
+    wrf_names: [CLDFRA]
+    units: fraction
+    aggregation: daily_mean
+    vertical_agg: max
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: CLDFRA
+      output_name: cloud_frac
+      wrf_names: [CLDFRA]
+      scale: 1.0
+      units: fraction
+      aggregation: daily_mean
+      vertical_agg: max
+    collector:
+      status: supported
+      output_aliases: [CLDFRA, CLOUD_FRAC]
+      field_aliases: [cloud_frac, cloud_frac_mean, CLDFRA]
+
+  RAINNC:
+    aliases: [RAINNC, PRECIP, precipitation]
+    kind: wrf_variable
+    wrf_names: [RAINNC]
+    units: mm
+    aggregation: daily_accum
+    readiness: supported
+    postprocess:
+      status: supported
+      variable_key: RAINNC
+      output_name: precip
+      wrf_names: [RAINNC]
+      scale: 1.0
+      units: mm
+      aggregation: daily_accum
+    collector:
+      status: supported
+      output_aliases: [RAINNC, PRECIP]
+      field_aliases: [precip, precip_mean, RAINNC]
+
+  NO3_AEROSOL:
+    aliases: [NO3_AEROSOL, NO3_aerosol, nitrate aerosol, nitrate, 硝酸盐]
+    kind: wrfchem_species
+    wrf_names: [NO3_AEROSOL, no3_aerosol, NO3, no3, ANO3I, ANO3J]
+    units: ug/m3
+    aggregation: daily_mean
+    readiness: designable_with_gap
+    postprocess:
+      status: missing
+      variable_key: NO3_AEROSOL
+      output_name: no3_aerosol
+      wrf_names: [NO3_AEROSOL, no3_aerosol, NO3, no3, ANO3I, ANO3J]
+      units: ug/m3
+      aggregation: daily_mean
+      gap_reason: missing_postprocess_extractor
+    collector:
+      status: missing
+      output_aliases: [NO3_AEROSOL, NO3_aerosol]
+      field_aliases: []
+      gap_reason: missing_collector_alias
+    provenance:
+      notes: Designable secondary nitrate diagnostic; not proven end-to-end in current v2 path.
+
+  NH3:
+    aliases: [NH3, ammonia, 氨]
+    kind: wrfchem_species
+    wrf_names: [NH3, nh3]
+    units: ppbv
+    aggregation: daily_mean
+    readiness: designable_with_gap
+    postprocess:
+      status: missing
+      variable_key: NH3
+      output_name: nh3
+      wrf_names: [NH3, nh3]
+      units: ppbv
+      aggregation: daily_mean
+      gap_reason: missing_postprocess_extractor
+    collector:
+      status: missing
+      output_aliases: [NH3]
+      field_aliases: []
+      gap_reason: missing_collector_alias
+
+  HNO3:
+    aliases: [HNO3, nitric acid]
+    kind: wrfchem_species
+    wrf_names: [HNO3, hno3]
+    units: ppbv
+    aggregation: daily_mean
+    readiness: designable_with_gap
+    postprocess:
+      status: missing
+      variable_key: HNO3
+      output_name: hno3
+      wrf_names: [HNO3, hno3]
+      units: ppbv
+      aggregation: daily_mean
+      gap_reason: missing_postprocess_extractor
+    collector:
+      status: missing
+      output_aliases: [HNO3]
+      field_aliases: []
+      gap_reason: missing_collector_alias
+
+  AMMONIUM:
+    aliases: [AMMONIUM, NH4, ammonium, 铵盐]
+    kind: wrfchem_species
+    wrf_names: [AMMONIUM, NH4, nh4, ANH4I, ANH4J]
+    units: ug/m3
+    aggregation: daily_mean
+    readiness: designable_with_gap
+    postprocess:
+      status: missing
+      variable_key: AMMONIUM
+      output_name: ammonium
+      wrf_names: [AMMONIUM, NH4, nh4, ANH4I, ANH4J]
+      units: ug/m3
+      aggregation: daily_mean
+      gap_reason: missing_postprocess_extractor
+    collector:
+      status: missing
+      output_aliases: [AMMONIUM, NH4]
+      field_aliases: []
+      gap_reason: missing_collector_alias
+
+  SULFATE:
+    aliases: [SULFATE, SO4, sulfate, 硫酸盐]
+    kind: wrfchem_species
+    wrf_names: [SULFATE, SO4, so4, ASO4I, ASO4J]
+    units: ug/m3
+    aggregation: daily_mean
+    readiness: designable_with_gap
+    postprocess:
+      status: missing
+      variable_key: SULFATE
+      output_name: sulfate
+      wrf_names: [SULFATE, SO4, so4, ASO4I, ASO4J]
+      units: ug/m3
+      aggregation: daily_mean
+      gap_reason: missing_postprocess_extractor
+    collector:
+      status: missing
+      output_aliases: [SULFATE, SO4]
+      field_aliases: []
+      gap_reason: missing_collector_alias
