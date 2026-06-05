@@ -1,0 +1,27 @@
+case,diagnostic,status
+H1,MDA8,present
+H1,NO2,present
+H1,PBLH,present
+H1,SWDOWN,present
+H1,HCHO/NO2,present
+H1,JNO2,missing
+H1,PM25,na
+H1,T2,na
+H1,BC1,na
+H1,AOD550,missing
+H1,BC vertical,na
+H1,Heating rate,na
+H1,Inversion,na
+H2,MDA8,na
+H2,NO2,na
+H2,PBLH,present
+H2,SWDOWN,present
+H2,HCHO/NO2,na
+H2,JNO2,na
+H2,PM25,present
+H2,T2,present
+H2,BC1,present
+H2,AOD550,missing
+H2,BC vertical,gap
+H2,Heating rate,gap
+H2,Inversion,gap
