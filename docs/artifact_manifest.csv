@@ -1,0 +1,72 @@
+public_path,source_path,manuscript_section,artifact_type,sanitization,notes
+CITATION.cff,generated,repository,citation,n/a,citation metadata
+LICENSE,generated,repository,license,n/a,MIT license for released scripts/documentation
+NOTICE.md,generated,repository,notice,n/a,scope and redistribution notice
+README.md,generated,repository,documentation,n/a,top-level repository overview
+case_studies/h1_ari_ozone/branch_results/ari_on_results.json,outputs/remote_results/v2_20260425_145200_recovery/ari_ozone_20260425_145200_ari_on_results.json,case study H1,sanitized_json,paths/tool names redacted,H1 branch-result summary
+case_studies/h1_ari_ozone/branch_results/combined_results.json,outputs/remote_results/v2_20260425_145200_recovery/ari_ozone_20260425_145200_combined_results.json,case study H1,sanitized_json,paths/tool names redacted,H1 branch-result summary
+case_studies/h1_ari_ozone/branch_results/control_results.json,outputs/remote_results/v2_20260425_145200_recovery/ari_ozone_20260425_145200_control_results.json,case study H1,sanitized_json,paths/tool names redacted,H1 branch-result summary
+case_studies/h1_ari_ozone/branch_results/nox_cut_results.json,outputs/remote_results/v2_20260425_145200_recovery/ari_ozone_20260425_145200_nox_cut_results.json,case study H1,sanitized_json,paths/tool names redacted,H1 branch-result summary
+case_studies/h1_ari_ozone/branch_table.csv,generated,case study H1,branch_table,n/a,H1 branch table
+case_studies/h1_ari_ozone/diagnostic_figures/integrated_diagnosis.png,paper/figures/5-1.png,case studies,figure_png,no,case-study diagnostic figure
+case_studies/h1_ari_ozone/diagnostic_figures/spatial_response.png,paper/figures/h1_tianhe_spatial_effect_maps.png,case studies,figure_png,no,case-study diagnostic figure
+case_studies/h1_ari_ozone/evidence_summary.md,generated,case study H1,evidence_summary,n/a,H1 evidence-state summary
+case_studies/h2_bc_pm25/branch_results/ari_on_high_bc_results.json,outputs/remote_results/v2_20260427_181352/ari_ozone_20260427_181352_treatment_ari_on_high_bc_results.json,case study H2,sanitized_json,paths/tool names redacted,H2 branch-result summary
+case_studies/h2_bc_pm25/branch_results/ari_on_normal_bc_results.json,outputs/remote_results/v2_20260427_181352/ari_ozone_20260427_181352_treatment_ari_on_normal_bc_results.json,case study H2,sanitized_json,paths/tool names redacted,H2 branch-result summary
+case_studies/h2_bc_pm25/branch_results/control_no_ari_normal_bc_results.json,outputs/remote_results/v2_20260427_181352/ari_ozone_20260427_181352_control_no_ari_normal_bc_results.json,case study H2,sanitized_json,paths/tool names redacted,H2 branch-result summary
+case_studies/h2_bc_pm25/branch_results/no_ari_high_bc_results.json,outputs/remote_results/v2_20260427_181352/ari_ozone_20260427_181352_treatment_no_ari_high_bc_results.json,case study H2,sanitized_json,paths/tool names redacted,H2 branch-result summary
+case_studies/h2_bc_pm25/branch_table.csv,generated,case study H2,branch_table,n/a,H2 branch table
+case_studies/h2_bc_pm25/diagnostic_figures/branch_timeseries_diagnostics.png,paper/figures/h2_branch_timeseries_diagnostics_2x3.png,case studies,figure_png,no,case-study diagnostic figure
+case_studies/h2_bc_pm25/diagnostic_figures/integrated_diagnosis.png,paper/figures/6-1.png,case studies,figure_png,no,case-study diagnostic figure
+case_studies/h2_bc_pm25/evidence_summary.md,generated,case study H2,evidence_summary,n/a,H2 evidence-state summary
+configs/registries/diagnostic_specs.yaml,configs/registries/diagnostic_specs.yaml,configs,config,paths/tool names redacted,selected diagnostic configuration
+configs/simple_analysis_benchmarks.yaml,configs/simple_analysis_benchmarks.yaml,configs,config,paths/tool names redacted,selected diagnostic configuration
+configs/simple_analysis_benchmarks_real.yaml,configs/simple_analysis_benchmarks_real.yaml,configs,config,paths/tool names redacted,selected diagnostic configuration
+configs/simple_analysis_benchmarks_real_gridded.yaml,configs/simple_analysis_benchmarks_real_gridded.yaml,configs,config,paths/tool names redacted,selected diagnostic configuration
+diagnostic_tasks/README.md,generated,diagnostic tasks,documentation,n/a,diagnostic task overview
+diagnostic_tasks/sa_01_mda8_o3_peak/figure.png,outputs/simple_analysis_real_gridded_rerun_20260602_173426/paper_selected_artifacts/sa_01_real_grid_o3_peak.png,diagnostic tasks,figure_png,no,diagnostic-task output figure
+diagnostic_tasks/sa_03_pm25_episode/figure.png,outputs/simple_analysis_real_gridded_rerun_20260602_173426/paper_selected_artifacts/sa_03_real_grid_pm25_episode.png,diagnostic tasks,figure_png,no,diagnostic-task output figure
+diagnostic_tasks/sa_05_o3_meteorology_covariation/figure.png,outputs/simple_analysis_real_gridded_rerun_20260602_173426/paper_selected_artifacts/sa_05_real_grid_o3_meteo_covariation.png,diagnostic tasks,figure_png,no,diagnostic-task output figure
+diagnostic_tasks/scores_summary.json,outputs/simple_analysis_real_gridded_rerun_20260602_173426/scores/summary.json,diagnostic tasks,summary_json,large details omitted,slim diagnostic score summary
+diagnostic_tasks/summary.md,generated,diagnostic tasks,summary,n/a,neutral diagnostic task summary
+docs/reproducibility.md,generated,data availability,documentation,n/a,reproducibility scope
+docs/third_party_data.md,generated,data availability,documentation,n/a,third-party data note
+paper_artifacts/figures/fig01_research_loop.png,paper/figures/7-1.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig02_multi_agent_architecture.png,paper/figures/1-1.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig03_hypothesis_generation_validation.png,paper/figures/2-1.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig04_hypothesis_to_evidence_chain.png,paper/figures/3-1.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig05_h1_integrated_diagnosis.png,paper/figures/5-1.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig06_h1_spatial_response.png,paper/figures/h1_tianhe_spatial_effect_maps.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig07_h2_integrated_diagnosis.png,paper/figures/6-1.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig08_h2_branch_timeseries_diagnostics.png,paper/figures/h2_branch_timeseries_diagnostics_2x3.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig09_research_action_reliability.png,paper/figures/nature_system/fig_agent_workload_reliability.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig10_h2_coordination_trajectory.png,paper/figures/nature_system/fig_h2_routing_handoff_combined.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/figures/fig11_diagnostic_tasks.png,paper/figures/diagnostic_tasks_composite.png,manuscript figures,figure_png,no,final manuscript figure
+paper_artifacts/source_data/agent_trace_workload.csv,paper/figures/nature_system/source_data/agent_trace_workload.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/diagnostic_coverage_matrix.csv,paper/figures/nature_system/source_data/diagnostic_coverage_matrix.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/diagnostic_tasks_composite.csv,paper/figures/source_data/simple_analysis_taskbench_real_gridded_maps6_refstyle.csv,manuscript source data,source_csv,no,figure source table
+paper_artifacts/source_data/h2_agent_handoff_trace.csv,paper/figures/nature_system/source_data/h2_agent_handoff_trace_rebuilt.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/h2_branch_mean_contrasts.csv,paper/figures/source_data/h2_branch_timeseries_diagnostics_2x3_mean_contrasts.csv,manuscript source data,source_csv,no,figure source table
+paper_artifacts/source_data/h2_branch_timeseries_diagnostics.csv,paper/figures/source_data/h2_branch_timeseries_diagnostics_2x3.csv,manuscript source data,source_csv,no,figure source table
+paper_artifacts/source_data/h2_combined_agent_trace.csv,paper/figures/nature_system/source_data/h2_combined_agent_trace.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/h2_combined_planner_routes.csv,paper/figures/nature_system/source_data/h2_combined_planner_routes.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/h2_planner_routing.csv,paper/figures/nature_system/source_data/h2_planner_routing_rebuilt.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/planner_route_distribution.csv,paper/figures/nature_system/source_data/planner_route_distribution.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/research_chain_stage_matrix.csv,paper/figures/nature_system/source_data/research_chain_stage_matrix.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/system_case_summary.csv,paper/figures/nature_system/source_data/case_summary.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/tool_category_workload.csv,paper/figures/nature_system/source_data/tool_category_workload.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+paper_artifacts/source_data/trace_audit_facts.csv,paper/figures/nature_system/source_data/trace_audit_facts.csv,manuscript source data,source_csv,paths/tool names redacted,sanitized system-trace source table
+scripts/README.md,generated,scripts,documentation,n/a,script usage note
+scripts/paper_figures/build_h2_timeseries_diagnostics.py,scripts/paper_figures/build_h2_timeseries_diagnostics.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+scripts/paper_figures/build_h2_timeseries_diagnostics_2x3.py,scripts/paper_figures/build_h2_timeseries_diagnostics_2x3.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+scripts/paper_figures/build_simple_analysis_taskbench_contourf_composite.py,scripts/paper_figures/build_simple_analysis_taskbench_contourf_composite.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+scripts/paper_figures/build_simple_analysis_taskbench_gridded_composite.py,scripts/paper_figures/build_simple_analysis_taskbench_gridded_composite.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+scripts/paper_figures/build_simple_analysis_taskbench_gridded_maps6_refstyle.py,scripts/paper_figures/build_simple_analysis_taskbench_gridded_maps6_refstyle.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+scripts/paper_figures/build_system_status_figures.py,scripts/paper_figures/build_system_status_figures.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+scripts/simple_analysis_benchmarks.py,scripts/simple_analysis_benchmarks.py,scripts,script,paths/tool names redacted,selected manuscript artifact script
+system_traces/README.md,generated,system analysis,documentation,n/a,system trace overview
+system_traces/research_chain/evidence_closure_matrix.png,paper/figures/nature_system/fig_evidence_closure_matrix.png,system analysis,figure_png,no,system-trace figure
+system_traces/research_chain/research_chain_audit.png,paper/figures/nature_system/fig_research_chain_audit.png,system analysis,figure_png,no,system-trace figure
+system_traces/routing_handoff/h2_routing_handoff_combined.png,paper/figures/nature_system/fig_h2_routing_handoff_combined.png,system analysis,figure_png,no,system-trace figure
+system_traces/tool_reliability/agent_workload_reliability.png,paper/figures/nature_system/fig_agent_workload_reliability.png,system analysis,figure_png,no,system-trace figure
+docs/artifact_manifest.csv,generated,repository,manifest,n/a,maps public files to local source artifacts
