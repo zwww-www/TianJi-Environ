@@ -1,0 +1,7 @@
+case,agent,trace_events
+H1,Planner,476
+H1,Scientist,332
+H1,Executor,312
+H2,Planner,18
+H2,Scientist,35
+H2,Executor,41
