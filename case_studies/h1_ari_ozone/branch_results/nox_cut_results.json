@@ -1,0 +1,273 @@
+{
+  "wrfout_dir": "redacted_remote_outputs/outputs",
+  "source_files": [
+    "redacted_remote_outputs/wrfout_d01_2021-06-15_00:00:00",
+    "redacted_remote_outputs/wrfout_d01_2021-06-15_12:00:00",
+    "redacted_remote_outputs/wrfout_d01_2021-06-16_00:00:00",
+    "redacted_remote_outputs/wrfout_d01_2021-06-16_12:00:00",
+    "redacted_remote_outputs/wrfout_d01_2021-06-17_00:00:00",
+    "redacted_remote_outputs/wrfout_d01_2021-06-17_12:00:00",
+    "redacted_remote_outputs/wrfout_d01_2021-06-18_00:00:00"
+  ],
+  "domain": 1,
+  "research_direction": null,
+  "variables_extracted": [
+    "MDA8",
+    "NO2",
+    "PBLH",
+    "SWDOWN",
+    "HCHO",
+    "HCHO_NO2_RATIO"
+  ],
+  "mda8": [
+    48.878664150834084,
+    46.99837416410446,
+    46.87412083148956,
+    45.76986748725176
+  ],
+  "mda8_dates": [
+    "2021-06-15",
+    "2021-06-16",
+    "2021-06-17",
+    "2021-06-18"
+  ],
+  "mda8_mean": 47.13025665841997,
+  "mda8_max": 48.878664150834084,
+  "mda8_min": 45.76986748725176,
+  "_mda8_detail": {
+    "variable": "o3",
+    "source_variables": [
+      "o3"
+    ],
+    "output_name": "mda8",
+    "units": "ppbv",
+    "description": "Daily Maximum 8-hour Average Ozone",
+    "aggregation": "mda8",
+    "n_timesteps": 73,
+    "mda8_values": [
+      48.878664150834084,
+      46.99837416410446,
+      46.87412083148956,
+      45.76986748725176
+    ],
+    "mda8_dates": [
+      "2021-06-15",
+      "2021-06-16",
+      "2021-06-17",
+      "2021-06-18"
+    ],
+    "mean": 47.13025665841997,
+    "max": 48.878664150834084,
+    "min": 45.76986748725176
+  },
+  "no2_daily": [
+    0.35224125895183533,
+    0.14258531518862583,
+    0.13889565616409527,
+    0.154625900904648
+  ],
+  "no2_dates": [
+    "2021-06-15T00:00:00",
+    "2021-06-16T00:00:00",
+    "2021-06-17T00:00:00",
+    "2021-06-18T00:00:00"
+  ],
+  "no2_mean": 0.1970870328023011,
+  "no2_max": 0.35224125895183533,
+  "no2_min": 0.13889565616409527,
+  "_no2_detail": {
+    "variable": "no2/NO2",
+    "source_variables": [
+      "no2",
+      "NO2"
+    ],
+    "output_name": "no2",
+    "units": "ppbv",
+    "description": "Nitrogen dioxide mixing ratio",
+    "aggregation": "daily_mean",
+    "n_timesteps": 73,
+    "daily_values": [
+      0.35224125895183533,
+      0.14258531518862583,
+      0.13889565616409527,
+      0.154625900904648
+    ],
+    "daily_dates": [
+      "2021-06-15T00:00:00",
+      "2021-06-16T00:00:00",
+      "2021-06-17T00:00:00",
+      "2021-06-18T00:00:00"
+    ],
+    "mean": 0.1970870328023011,
+    "max": 0.35224125895183533,
+    "min": 0.13889565616409527
+  },
+  "pblh_daily": [
+    3019.4400431315103,
+    2930.593953450521,
+    2668.4590504964194,
+    2251.39892578125
+  ],
+  "pblh_dates": [
+    "2021-06-15T00:00:00",
+    "2021-06-16T00:00:00",
+    "2021-06-17T00:00:00",
+    "2021-06-18T00:00:00"
+  ],
+  "pblh_mean": 2717.4729932149253,
+  "pblh_max": 3019.4400431315103,
+  "pblh_min": 2251.39892578125,
+  "_pblh_detail": {
+    "variable": "PBLH",
+    "source_variables": [
+      "PBLH"
+    ],
+    "output_name": "pblh",
+    "units": "m",
+    "description": "Planetary boundary layer height",
+    "aggregation": "daily_mean",
+    "n_timesteps": 73,
+    "daily_values": [
+      3019.4400431315103,
+      2930.593953450521,
+      2668.4590504964194,
+      2251.39892578125
+    ],
+    "daily_dates": [
+      "2021-06-15T00:00:00",
+      "2021-06-16T00:00:00",
+      "2021-06-17T00:00:00",
+      "2021-06-18T00:00:00"
+    ],
+    "mean": 2717.4729932149253,
+    "max": 3019.4400431315103,
+    "min": 2251.39892578125
+  },
+  "swdown_daily": [
+    105.56793167442083,
+    247.5860899835825,
+    248.78343787292638,
+    343.1092834472656
+  ],
+  "swdown_dates": [
+    "2021-06-15T00:00:00",
+    "2021-06-16T00:00:00",
+    "2021-06-17T00:00:00",
+    "2021-06-18T00:00:00"
+  ],
+  "swdown_mean": 236.26168574454883,
+  "swdown_max": 343.1092834472656,
+  "swdown_min": 105.56793167442083,
+  "_swdown_detail": {
+    "variable": "SWDOWN",
+    "source_variables": [
+      "SWDOWN"
+    ],
+    "output_name": "swdown",
+    "units": "W/m2",
+    "description": "Downward shortwave radiation",
+    "aggregation": "daily_mean",
+    "n_timesteps": 73,
+    "daily_values": [
+      105.56793167442083,
+      247.5860899835825,
+      248.78343787292638,
+      343.1092834472656
+    ],
+    "daily_dates": [
+      "2021-06-15T00:00:00",
+      "2021-06-16T00:00:00",
+      "2021-06-17T00:00:00",
+      "2021-06-18T00:00:00"
+    ],
+    "mean": 236.26168574454883,
+    "max": 343.1092834472656,
+    "min": 105.56793167442083
+  },
+  "hcho_daily": [
+    0.9251184819731861,
+    0.571180253852314,
+    0.5341268503495181,
+    0.5482943961396813
+  ],
+  "hcho_dates": [
+    "2021-06-15T00:00:00",
+    "2021-06-16T00:00:00",
+    "2021-06-17T00:00:00",
+    "2021-06-18T00:00:00"
+  ],
+  "hcho_mean": 0.6446799955786748,
+  "hcho_max": 0.9251184819731861,
+  "hcho_min": 0.5341268503495181,
+  "_hcho_detail": {
+    "variable": "HCHO/CH2O/hcho/ch2o",
+    "source_variables": [
+      "HCHO",
+      "CH2O",
+      "hcho",
+      "ch2o"
+    ],
+    "output_name": "hcho",
+    "units": "ppbv",
+    "description": "Formaldehyde mixing ratio",
+    "aggregation": "daily_mean",
+    "n_timesteps": 73,
+    "daily_values": [
+      0.9251184819731861,
+      0.571180253852314,
+      0.5341268503495181,
+      0.5482943961396813
+    ],
+    "daily_dates": [
+      "2021-06-15T00:00:00",
+      "2021-06-16T00:00:00",
+      "2021-06-17T00:00:00",
+      "2021-06-18T00:00:00"
+    ],
+    "mean": 0.6446799955786748,
+    "max": 0.9251184819731861,
+    "min": 0.5341268503495181
+  },
+  "hcho_no2_ratio_daily": [
+    2.6263774003251696,
+    4.0058841480043075,
+    3.8455259516430487,
+    3.5459414815490318
+  ],
+  "hcho_no2_ratio_dates": [
+    "2021-06-15T00:00:00",
+    "2021-06-16T00:00:00",
+    "2021-06-17T00:00:00",
+    "2021-06-18T00:00:00"
+  ],
+  "hcho_no2_ratio_mean": 3.5059322453803894,
+  "hcho_no2_ratio_max": 4.0058841480043075,
+  "hcho_no2_ratio_min": 2.6263774003251696,
+  "_hcho_no2_ratio_detail": {
+    "variable": "HCHO_NO2_ratio",
+    "source_variables": [
+      "HCHO",
+      "NO2"
+    ],
+    "output_name": "hcho_no2_ratio",
+    "units": "ratio",
+    "description": "Daily HCHO/NO2 ratio",
+    "aggregation": "daily_mean",
+    "daily_values": [
+      2.6263774003251696,
+      4.0058841480043075,
+      3.8455259516430487,
+      3.5459414815490318
+    ],
+    "daily_dates": [
+      "2021-06-15T00:00:00",
+      "2021-06-16T00:00:00",
+      "2021-06-17T00:00:00",
+      "2021-06-18T00:00:00"
+    ],
+    "mean": 3.5059322453803894,
+    "max": 4.0058841480043075,
+    "min": 2.6263774003251696,
+    "n_timesteps": 4
+  }
+}
