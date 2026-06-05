@@ -1,0 +1,552 @@
+suite:
+  id: simple_analysis_realdata_taskbench
+  version: '0.1'
+  evidence_role: simple_analysis_task_benchmark
+  artifact_boundary: benchmark_or_presentation_artifact_only
+  requires_wrfchem_execution: false
+  requires_tianhe_access: false
+  requires_ssh: false
+  requires_remote_postprocessing: false
+  requires_large_netcdf: false
+  output_root: outputs/simple_analysis_real
+task_families:
+- task_family_id: SA-01
+  title: Real-data MDA8 O3 peak-process identification
+  category: simple_analysis
+  task_type: mda8_peak_process
+  plot_family: mda8_peak_spatial_map
+  required_columns:
+  - timestamp
+  - location
+  - lon
+  - lat
+  - o3_ppbv
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-01-real-openmeteo-prd-o3-peak
+    split: heldout
+    question: Identify the strongest MDA8 O3 process from real hourly O3 data.
+    fixtures:
+    - role: hourly_o3_table
+      path: data/processed/simple_analysis_real/fixtures/hourly_o3/sa01_real_openmeteo_prd_o3.csv
+    ir:
+      version: 1
+      analysis_type: temporal_spatial_peak
+      dataset_role: hourly_o3_table
+      columns:
+        time: timestamp
+        location: location
+        lon: lon
+        lat: lat
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+      operators:
+      - name: temporal_metric
+        variable: o3
+        metric: mda8
+        output_key: mda8_ppbv
+      - name: spatial_field
+        field: mda8_ppbv
+      - name: ranking_extrema
+        field: mda8_ppbv
+        mode: maximum
+      figure_recipe:
+        plot_family: mda8_peak_spatial_map
+        panel_count: 1
+        spatial: true
+        field: mda8_ppbv
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - temporal_metric
+      - peak_localization
+      - spatial_field
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd
+        axis: hourly_o3
+  - case_id: SA-01-real-openmeteo-prd-o3-peak-dev
+    split: dev
+    question: Development mirror for the real hourly O3 MDA8 peak task.
+    fixtures:
+    - role: hourly_o3_table
+      path: data/processed/simple_analysis_real/fixtures/hourly_o3/sa01_real_openmeteo_prd_o3.csv
+    ir:
+      version: 1
+      analysis_type: temporal_spatial_peak
+      dataset_role: hourly_o3_table
+      columns:
+        time: timestamp
+        location: location
+        lon: lon
+        lat: lat
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+      operators:
+      - name: temporal_metric
+        variable: o3
+        metric: mda8
+        output_key: mda8_ppbv
+      - name: spatial_field
+        field: mda8_ppbv
+      - name: ranking_extrema
+        field: mda8_ppbv
+        mode: maximum
+      figure_recipe:
+        plot_family: mda8_peak_spatial_map
+        panel_count: 1
+        spatial: true
+        field: mda8_ppbv
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - temporal_metric
+      - peak_localization
+      - spatial_field
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd
+        axis: hourly_o3
+- task_family_id: SA-03
+  title: Real-data PRD MDA8 O3 branch-delta analysis
+  category: simple_analysis
+  task_type: control_treatment_o3_delta
+  plot_family: mda8_delta_spatial_map
+  required_columns:
+  - timestamp
+  - location
+  - lon
+  - lat
+  - branch
+  - o3_ppbv
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-03-real-openmeteo-prd-mda8-delta
+    split: heldout
+    question: Analyze treatment minus control MDA8 O3 branch differences over the
+      Pearl River Delta.
+    fixtures:
+    - role: branch_o3_table
+      path: data/processed/simple_analysis_real/fixtures/branch_o3/sa03_real_openmeteo_prd_mda8_delta.csv
+    ir:
+      version: 1
+      analysis_type: branch_spatial_delta
+      dataset_role: branch_o3_table
+      columns:
+        time: timestamp
+        location: location
+        lon: lon
+        lat: lat
+        branch: branch
+      branch_mapping:
+        baseline: control
+        scenario: treatment
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+          delta_key: delta_mda8_ppbv
+      operators:
+      - name: branch_contrast
+        metric: mda8
+        variables:
+        - o3
+      - name: spatial_field
+        field: delta_mda8_ppbv
+      - name: ranking_extrema
+        field: delta_mda8_ppbv
+        mode: minmax
+      figure_recipe:
+        plot_family: mda8_delta_spatial_map
+        panel_count: 1
+        spatial: true
+        field: delta_mda8_ppbv
+        diverging: true
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - branch_contrast
+      - extrema_localization
+      - spatial_delta
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd_branch_delta
+        axis: control_treatment_mda8_delta
+  - case_id: SA-03-real-openmeteo-prd-mda8-delta-dev
+    split: dev
+    question: Development mirror for Pearl River Delta treatment minus control MDA8
+      O3 branch differences.
+    fixtures:
+    - role: branch_o3_table
+      path: data/processed/simple_analysis_real/fixtures/branch_o3/sa03_real_openmeteo_prd_mda8_delta.csv
+    ir:
+      version: 1
+      analysis_type: branch_spatial_delta
+      dataset_role: branch_o3_table
+      columns:
+        time: timestamp
+        location: location
+        lon: lon
+        lat: lat
+        branch: branch
+      branch_mapping:
+        baseline: control
+        scenario: treatment
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+          delta_key: delta_mda8_ppbv
+      operators:
+      - name: branch_contrast
+        metric: mda8
+        variables:
+        - o3
+      - name: spatial_field
+        field: delta_mda8_ppbv
+      - name: ranking_extrema
+        field: delta_mda8_ppbv
+        mode: minmax
+      figure_recipe:
+        plot_family: mda8_delta_spatial_map
+        panel_count: 1
+        spatial: true
+        field: delta_mda8_ppbv
+        diverging: true
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - branch_contrast
+      - extrema_localization
+      - spatial_delta
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_prd_branch_delta
+        axis: control_treatment_mda8_delta
+- task_family_id: SA-05
+  title: Real-data O3-meteorology mechanism-chain quick diagnosis
+  category: simple_analysis
+  task_type: uhi_o3_mechanism_chain
+  plot_family: uhi_o3_spatial_mechanism_panels
+  required_columns:
+  - location
+  - lon
+  - lat
+  - branch
+  - o3_ppbv
+  - t2_k
+  - pblh_m
+  - swdown_wm2
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-05-real-openmeteo-o3-meteo-chain
+    split: heldout
+    question: Diagnose whether real O3 and meteorological differences form a bounded
+      mechanism chain.
+    fixtures:
+    - role: mechanism_diagnostic_table
+      path: data/processed/simple_analysis_real/fixtures/mechanism/sa05_real_openmeteo_o3_meteo.csv
+    ir:
+      version: 1
+      analysis_type: mechanism_chain
+      dataset_role: mechanism_diagnostic_table
+      columns:
+        location: location
+        lon: lon
+        lat: lat
+        branch: branch
+      branch_mapping:
+        baseline: control
+        scenario: treatment
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+          delta_key: delta_o3_ppbv
+        t2:
+          column: t2_k
+          units: K
+          role: diagnostic
+          delta_key: delta_t2_k
+        pblh:
+          column: pblh_m
+          units: m
+          role: diagnostic
+          delta_key: delta_pblh_m
+        swdown:
+          column: swdown_wm2
+          units: W m-2
+          role: diagnostic
+          delta_key: delta_swdown_wm2
+      operators:
+      - name: branch_contrast
+        metric: mean
+        variables:
+        - o3
+        - t2
+        - pblh
+        - swdown
+      - name: mechanism_chain
+        endpoint: o3
+        expectations: {}
+        mechanism_label: real O3-meteorology mechanism-chain
+        next_evidence_needed: Add precursor, transport, and observation uncertainty
+          diagnostics.
+      - name: spatial_field
+        fields:
+        - delta_o3_ppbv
+        - delta_t2_k
+        - delta_pblh_m
+        - delta_swdown_wm2
+      figure_recipe:
+        plot_family: uhi_o3_spatial_mechanism_panels
+        panel_count: 4
+        spatial: true
+        fields:
+        - delta_o3_ppbv
+        - delta_t2_k
+        - delta_pblh_m
+        - delta_swdown_wm2
+        diverging: true
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - branch_contrast
+      - mechanism_chain
+      - bounded_interpretation
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_o3_meteo
+        axis: event_vs_reference
+  - case_id: SA-05-real-openmeteo-o3-meteo-chain-dev
+    split: dev
+    question: Development mirror for real O3 and meteorological mechanism-chain diagnosis.
+    fixtures:
+    - role: mechanism_diagnostic_table
+      path: data/processed/simple_analysis_real/fixtures/mechanism/sa05_real_openmeteo_o3_meteo.csv
+    ir:
+      version: 1
+      analysis_type: mechanism_chain
+      dataset_role: mechanism_diagnostic_table
+      columns:
+        location: location
+        lon: lon
+        lat: lat
+        branch: branch
+      branch_mapping:
+        baseline: control
+        scenario: treatment
+      variables:
+        o3:
+          column: o3_ppbv
+          units: ppbv
+          role: endpoint
+          delta_key: delta_o3_ppbv
+        t2:
+          column: t2_k
+          units: K
+          role: diagnostic
+          delta_key: delta_t2_k
+        pblh:
+          column: pblh_m
+          units: m
+          role: diagnostic
+          delta_key: delta_pblh_m
+        swdown:
+          column: swdown_wm2
+          units: W m-2
+          role: diagnostic
+          delta_key: delta_swdown_wm2
+      operators:
+      - name: branch_contrast
+        metric: mean
+        variables:
+        - o3
+        - t2
+        - pblh
+        - swdown
+      - name: mechanism_chain
+        endpoint: o3
+        expectations: {}
+        mechanism_label: real O3-meteorology mechanism-chain
+        next_evidence_needed: Add precursor, transport, and observation uncertainty
+          diagnostics.
+      - name: spatial_field
+        fields:
+        - delta_o3_ppbv
+        - delta_t2_k
+        - delta_pblh_m
+        - delta_swdown_wm2
+      figure_recipe:
+        plot_family: uhi_o3_spatial_mechanism_panels
+        panel_count: 4
+        spatial: true
+        fields:
+        - delta_o3_ppbv
+        - delta_t2_k
+        - delta_pblh_m
+        - delta_swdown_wm2
+        diverging: true
+        outline: none
+      report_recipe:
+        style: researcher_compact
+      scoring_expectations:
+      - branch_contrast
+      - mechanism_chain
+      - bounded_interpretation
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: real_openmeteo_o3_meteo
+        axis: event_vs_reference
+- task_family_id: SA-08
+  title: Wet-scavenging sulfate evidence and claim-boundary check
+  category: simple_analysis
+  task_type: wet_scavenging_sulfate_boundary
+  plot_family: sulfate_wet_spatial_evidence
+  required_columns:
+  - location
+  - lon
+  - lat
+  - branch
+  - so4_ugm3
+  - rainnc_mm
+  - wetdep_proxy
+  expected_artifacts:
+  - json_score
+  - markdown_report
+  - png_figure
+  cases:
+  - case_id: SA-08-dev-sulfate-wet
+    split: dev
+    question: Check whether sulfate decrease is supported by wet-scavenging evidence.
+    fixtures:
+    - role: sulfate_wet_removal_table
+      path: tests/fixtures/simple_analysis/sulfate/sa08_dev_sulfate_wet.csv
+    ir:
+      version: 1
+      analysis_type: evidence_boundary
+      dataset_role: sulfate_wet_removal_table
+      columns: &id001
+        location: location
+        lon: lon
+        lat: lat
+        branch: branch
+      branch_mapping: &id002
+        baseline: control
+        scenario: treatment
+      variables: &id003
+        so4:
+          column: so4_ugm3
+          units: ug m-3
+          role: endpoint
+          delta_key: delta_so4_ugm3
+        rain:
+          column: rainnc_mm
+          units: mm
+          role: diagnostic
+          delta_key: delta_rainnc_mm
+        wetdep:
+          column: wetdep_proxy
+          units: proxy
+          role: diagnostic
+          delta_key: delta_wetdep_proxy
+      operators: &id004
+      - name: branch_contrast
+        metric: mean
+        variables:
+        - so4
+        - rain
+        - wetdep
+      - name: evidence_boundary
+        endpoint: so4
+        mechanism_variables:
+        - rain
+        - wetdep
+      - name: spatial_field
+        fields:
+        - delta_so4_ugm3
+        - delta_wetdep_proxy
+      figure_recipe: &id005
+        plot_family: sulfate_wet_spatial_evidence
+        panel_count: 2
+        spatial: true
+        fields:
+        - delta_so4_ugm3
+        - delta_wetdep_proxy
+        outline: none
+      report_recipe: &id006
+        style: researcher_compact
+      scoring_expectations: &id007
+      - endpoint_delta
+      - evidence_boundary
+      - next_evidence
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: baseline
+        axis: complete_wet_evidence
+  - case_id: SA-08-heldout-sulfate-boundary
+    split: heldout
+    question: Bound claims when sulfate decreases but wet-scavenging evidence is incomplete.
+    fixtures:
+    - role: sulfate_wet_removal_table
+      path: tests/fixtures/simple_analysis/sulfate/sa08_heldout_sulfate_wet.csv
+    ir:
+      version: 1
+      analysis_type: evidence_boundary
+      dataset_role: sulfate_wet_removal_table
+      columns: *id001
+      branch_mapping: *id002
+      variables: *id003
+      operators: *id004
+      figure_recipe: *id005
+      report_recipe: *id006
+      scoring_expectations: *id007
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: diagnostic_completeness_variant
+        axis: wetdep_and_rain_missing
+  - case_id: SA-08-heldout-rain-only-boundary
+    split: heldout
+    question: Bound sulfate wet-scavenging claims when rainfall exists but wet-deposition
+      proxy is missing.
+    fixtures:
+    - role: sulfate_wet_removal_table
+      path: tests/fixtures/simple_analysis/sulfate/sa08_heldout_rain_only_boundary.csv
+    ir:
+      version: 1
+      analysis_type: evidence_boundary
+      dataset_role: sulfate_wet_removal_table
+      columns: *id001
+      branch_mapping: *id002
+      variables: *id003
+      operators: *id004
+      figure_recipe: *id005
+      report_recipe: *id006
+      scoring_expectations: *id007
+      artifact_boundary: benchmark_or_presentation_artifact_only
+      variant:
+        kind: diagnostic_completeness_variant
+        axis: rain_available_wetdep_missing
