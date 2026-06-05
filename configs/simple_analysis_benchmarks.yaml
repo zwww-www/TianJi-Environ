@@ -1,0 +1,227 @@
+suite:
+  id: simple_analysis_taskbench
+  version: "0.2"
+  evidence_role: simple_analysis_task_benchmark
+  artifact_boundary: benchmark_or_presentation_artifact_only
+  requires_wrfchem_execution: false
+  requires_tianhe_access: false
+  requires_ssh: false
+  requires_remote_postprocessing: false
+  requires_large_netcdf: false
+  output_root: outputs/simple_analysis_bench
+
+task_families:
+  - task_family_id: SA-01
+    title: MDA8 O3 peak-process identification
+    category: simple_analysis
+    task_type: mda8_peak_process
+    plot_family: mda8_peak_spatial_map
+    required_columns: [timestamp, location, lon, lat, o3_ppbv]
+    expected_artifacts: [json_score, markdown_report, png_figure]
+    cases:
+      - case_id: SA-01-dev-o3-peak
+        split: dev
+        question: Find the strongest MDA8 O3 process and locate the affected city.
+        fixtures:
+          - {role: hourly_o3_table, path: tests/fixtures/simple_analysis/hourly_o3/sa01_dev_hourly_o3.csv}
+        ir: &sa01_o3_ir
+          version: 1
+          analysis_type: temporal_spatial_peak
+          dataset_role: hourly_o3_table
+          columns: {time: timestamp, location: location, lon: lon, lat: lat}
+          variables:
+            o3: {column: o3_ppbv, units: ppbv, role: endpoint}
+          operators:
+            - {name: temporal_metric, variable: o3, metric: mda8, output_key: mda8_ppbv}
+            - {name: spatial_field, field: mda8_ppbv}
+            - {name: ranking_extrema, field: mda8_ppbv, mode: maximum}
+          figure_recipe:
+            plot_family: mda8_peak_spatial_map
+            panel_count: 1
+            spatial: true
+            field: mda8_ppbv
+            outline: none
+          report_recipe: {style: researcher_compact}
+          scoring_expectations: [temporal_metric, peak_localization, spatial_field]
+          artifact_boundary: benchmark_or_presentation_artifact_only
+          variant: {kind: baseline, axis: original_o3_column}
+      - case_id: SA-01-heldout-o3-peak
+        split: heldout
+        question: Identify the held-out MDA8 O3 peak process from hourly O3 output.
+        fixtures:
+          - {role: hourly_o3_table, path: tests/fixtures/simple_analysis/hourly_o3/sa01_heldout_hourly_o3.csv}
+        ir: *sa01_o3_ir
+      - case_id: SA-01-heldout-ozone-column-variant
+        split: heldout
+        question: Identify a held-out MDA8 peak when the ozone column is named differently.
+        fixtures:
+          - {role: hourly_o3_table, path: tests/fixtures/simple_analysis/hourly_o3/sa01_heldout_ozone_column_variant.csv}
+        ir:
+          <<: *sa01_o3_ir
+          variables:
+            o3: {column: ozone_ppbv, units: ppbv, role: endpoint}
+          variant: {kind: variable_name_variant, axis: ozone_column_renamed}
+
+  - task_family_id: SA-03
+    title: Control-treatment MDA8 O3 change analysis
+    category: simple_analysis
+    task_type: control_treatment_o3_delta
+    plot_family: mda8_delta_spatial_map
+    required_columns: [timestamp, location, lon, lat, branch, o3_ppbv]
+    expected_artifacts: [json_score, markdown_report, png_figure]
+    cases:
+      - case_id: SA-03-dev-o3-delta
+        split: dev
+        question: Quantify treatment-control MDA8 O3 changes and locate strongest responses.
+        fixtures:
+          - {role: branch_o3_table, path: tests/fixtures/simple_analysis/branch_o3/sa03_dev_branch_o3.csv}
+        ir: &sa03_o3_ir
+          version: 1
+          analysis_type: branch_spatial_delta
+          dataset_role: branch_o3_table
+          columns: {time: timestamp, location: location, lon: lon, lat: lat, branch: branch}
+          branch_mapping: {baseline: control, scenario: treatment}
+          variables:
+            o3: {column: o3_ppbv, units: ppbv, role: endpoint, delta_key: delta_mda8_ppbv}
+          operators:
+            - {name: branch_contrast, metric: mda8, variables: [o3]}
+            - {name: spatial_field, field: delta_mda8_ppbv}
+            - {name: ranking_extrema, field: delta_mda8_ppbv, mode: minmax}
+          figure_recipe:
+            plot_family: mda8_delta_spatial_map
+            panel_count: 1
+            spatial: true
+            field: delta_mda8_ppbv
+            diverging: true
+            outline: none
+          report_recipe: {style: researcher_compact}
+          scoring_expectations: [branch_contrast, extrema_localization, spatial_delta]
+          artifact_boundary: benchmark_or_presentation_artifact_only
+          variant: {kind: baseline, axis: control_treatment_labels}
+      - case_id: SA-03-heldout-o3-delta
+        split: heldout
+        question: Analyze held-out treatment-control O3 changes across cities.
+        fixtures:
+          - {role: branch_o3_table, path: tests/fixtures/simple_analysis/branch_o3/sa03_heldout_branch_o3.csv}
+        ir: *sa03_o3_ir
+      - case_id: SA-03-heldout-branch-label-variant
+        split: heldout
+        question: Analyze MDA8 O3 changes when branches are named baseline and scenario.
+        fixtures:
+          - {role: branch_o3_table, path: tests/fixtures/simple_analysis/branch_o3/sa03_heldout_branch_label_variant.csv}
+        ir:
+          <<: *sa03_o3_ir
+          branch_mapping: {baseline: baseline, scenario: scenario}
+          variant: {kind: branch_label_variant, axis: branch_labels_renamed}
+
+  - task_family_id: SA-05
+    title: UHI-O3 mechanism-chain quick diagnosis
+    category: simple_analysis
+    task_type: uhi_o3_mechanism_chain
+    plot_family: uhi_o3_spatial_mechanism_panels
+    required_columns: [location, lon, lat, branch, o3_ppbv, t2_k, pblh_m, swdown_wm2]
+    expected_artifacts: [json_score, markdown_report, png_figure]
+    cases:
+      - case_id: SA-05-dev-uhi-chain
+        split: dev
+        question: Diagnose whether UHI mitigation changes O3 through T2 and PBLH pathways.
+        fixtures:
+          - {role: mechanism_diagnostic_table, path: tests/fixtures/simple_analysis/mechanism/sa05_dev_uhi_mechanism.csv}
+        ir: &sa05_uhi_ir
+          version: 1
+          analysis_type: mechanism_chain
+          dataset_role: mechanism_diagnostic_table
+          columns: {location: location, lon: lon, lat: lat, branch: branch}
+          branch_mapping: {baseline: control, scenario: treatment}
+          variables:
+            o3: {column: o3_ppbv, units: ppbv, role: endpoint, delta_key: delta_o3_ppbv}
+            t2: {column: t2_k, units: K, role: diagnostic, delta_key: delta_t2_k}
+            pblh: {column: pblh_m, units: m, role: diagnostic, delta_key: delta_pblh_m}
+            swdown: {column: swdown_wm2, units: W m-2, role: diagnostic, delta_key: delta_swdown_wm2}
+          operators:
+            - {name: branch_contrast, metric: mean, variables: [o3, t2, pblh, swdown]}
+            - {name: mechanism_chain, endpoint: o3, expectations: {o3: negative, t2: negative, pblh: positive}, mechanism_label: UHI-O3 mechanism-chain}
+            - {name: spatial_field, fields: [delta_o3_ppbv, delta_t2_k, delta_pblh_m, delta_swdown_wm2]}
+          figure_recipe:
+            plot_family: uhi_o3_spatial_mechanism_panels
+            panel_count: 4
+            spatial: true
+            fields: [delta_o3_ppbv, delta_t2_k, delta_pblh_m, delta_swdown_wm2]
+            diverging: true
+            outline: none
+          report_recipe: {style: researcher_compact}
+          scoring_expectations: [branch_contrast, mechanism_chain, bounded_interpretation]
+          artifact_boundary: benchmark_or_presentation_artifact_only
+          variant: {kind: baseline, axis: uhi_o3_mechanism}
+      - case_id: SA-05-heldout-uhi-chain
+        split: heldout
+        question: Diagnose a held-out UHI-O3 mechanism-chain case.
+        fixtures:
+          - {role: mechanism_diagnostic_table, path: tests/fixtures/simple_analysis/mechanism/sa05_heldout_uhi_mechanism.csv}
+        ir: *sa05_uhi_ir
+      - case_id: SA-05-heldout-seabreeze-chain
+        split: heldout
+        question: Diagnose a sea-breeze ventilation O3 mechanism-chain variant.
+        fixtures:
+          - {role: mechanism_diagnostic_table, path: tests/fixtures/simple_analysis/mechanism/sa05_heldout_seabreeze_mechanism.csv}
+        ir:
+          <<: *sa05_uhi_ir
+          operators:
+            - {name: branch_contrast, metric: mean, variables: [o3, t2, pblh, swdown]}
+            - {name: mechanism_chain, endpoint: o3, expectations: {o3: negative, t2: negative, pblh: positive}, mechanism_label: sea-breeze-O3 mechanism-chain}
+            - {name: spatial_field, fields: [delta_o3_ppbv, delta_t2_k, delta_pblh_m, delta_swdown_wm2]}
+          variant: {kind: mechanism_scenario_variant, axis: sea_breeze_o3}
+
+  - task_family_id: SA-08
+    title: Wet-scavenging sulfate evidence and claim-boundary check
+    category: simple_analysis
+    task_type: wet_scavenging_sulfate_boundary
+    plot_family: sulfate_wet_spatial_evidence
+    required_columns: [location, lon, lat, branch, so4_ugm3, rainnc_mm, wetdep_proxy]
+    expected_artifacts: [json_score, markdown_report, png_figure]
+    cases:
+      - case_id: SA-08-dev-sulfate-wet
+        split: dev
+        question: Check whether sulfate decrease is supported by wet-scavenging evidence.
+        fixtures:
+          - {role: sulfate_wet_removal_table, path: tests/fixtures/simple_analysis/sulfate/sa08_dev_sulfate_wet.csv}
+        ir: &sa08_sulfate_ir
+          version: 1
+          analysis_type: evidence_boundary
+          dataset_role: sulfate_wet_removal_table
+          columns: {location: location, lon: lon, lat: lat, branch: branch}
+          branch_mapping: {baseline: control, scenario: treatment}
+          variables:
+            so4: {column: so4_ugm3, units: ug m-3, role: endpoint, delta_key: delta_so4_ugm3}
+            rain: {column: rainnc_mm, units: mm, role: diagnostic, delta_key: delta_rainnc_mm}
+            wetdep: {column: wetdep_proxy, units: proxy, role: diagnostic, delta_key: delta_wetdep_proxy}
+          operators:
+            - {name: branch_contrast, metric: mean, variables: [so4, rain, wetdep]}
+            - {name: evidence_boundary, endpoint: so4, mechanism_variables: [rain, wetdep]}
+            - {name: spatial_field, fields: [delta_so4_ugm3, delta_wetdep_proxy]}
+          figure_recipe:
+            plot_family: sulfate_wet_spatial_evidence
+            panel_count: 2
+            spatial: true
+            fields: [delta_so4_ugm3, delta_wetdep_proxy]
+            outline: none
+          report_recipe: {style: researcher_compact}
+          scoring_expectations: [endpoint_delta, evidence_boundary, next_evidence]
+          artifact_boundary: benchmark_or_presentation_artifact_only
+          variant: {kind: baseline, axis: complete_wet_evidence}
+      - case_id: SA-08-heldout-sulfate-boundary
+        split: heldout
+        question: Bound claims when sulfate decreases but wet-scavenging evidence is incomplete.
+        fixtures:
+          - {role: sulfate_wet_removal_table, path: tests/fixtures/simple_analysis/sulfate/sa08_heldout_sulfate_wet.csv}
+        ir:
+          <<: *sa08_sulfate_ir
+          variant: {kind: diagnostic_completeness_variant, axis: wetdep_and_rain_missing}
+      - case_id: SA-08-heldout-rain-only-boundary
+        split: heldout
+        question: Bound sulfate wet-scavenging claims when rainfall exists but wet-deposition proxy is missing.
+        fixtures:
+          - {role: sulfate_wet_removal_table, path: tests/fixtures/simple_analysis/sulfate/sa08_heldout_rain_only_boundary.csv}
+        ir:
+          <<: *sa08_sulfate_ir
+          variant: {kind: diagnostic_completeness_variant, axis: rain_available_wetdep_missing}
