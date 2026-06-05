@@ -1,0 +1,3 @@
+case,title,branches,tool_calls,tool_successes,tool_failures,tool_success_rate,planner_decisions,observed_diagnostics,expected_diagnostics,evidence_fraction,verdict,confidence
+H1,NCP summer O3 response,4,644,635,9,0.986,476,20,28,0.714,partially_supported,medium
+H2,Guanzhong winter PM2.5 response,4,76,76,0,1.0,18,20,24,0.833,rejected,high
