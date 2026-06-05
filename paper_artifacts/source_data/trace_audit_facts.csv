@@ -1,0 +1,3 @@
+case,trace_events,planner_decisions,tool_failures,evidence_fraction,verdict
+H1,1120,476,9,0.714,partially_supported
+H2,94,18,0,0.833,rejected
