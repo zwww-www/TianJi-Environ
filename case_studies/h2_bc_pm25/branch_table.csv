@@ -1,0 +1,5 @@
+branch,ari_state,bc_setting,main_contrast,public_result_file,notes
+control_no_ari_normal_bc,off,normal BC,reference,branch_results/control_no_ari_normal_bc_results.json,Reference branch for H2.
+ari_on_normal_bc,on,normal BC,ARI effect,branch_results/ari_on_normal_bc_results.json,Tests ARI response under normal BC setting.
+no_ari_high_bc,off,high BC,BC-load effect without ARI,branch_results/no_ari_high_bc_results.json,Tests whether high-BC perturbation is expressed without ARI.
+ari_on_high_bc,on,high BC,combined ARI and high-BC effect,branch_results/ari_on_high_bc_results.json,Tests whether BC perturbation propagates under ARI-enabled conditions.
