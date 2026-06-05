@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "cases_passed": 3,
+  "cases_total": 3,
+  "families_passed": 3,
+  "families_total": 3,
+  "heldout_pass_rate": 1.0,
+  "figures_generated": 3,
+  "reports_generated": 3,
+  "selected_task_family_ids": [
+    "SA-01",
+    "SA-03",
+    "SA-05"
+  ],
+  "split": "heldout",
+  "suite_id": "simple_analysis_real_gridded_taskbench",
+  "version": "0.1"
+}
