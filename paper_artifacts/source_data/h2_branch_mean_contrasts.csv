@@ -1,0 +1,26 @@
+variable,variable_label,contrast,delta,percent_change,plot_delta,scaled_units
+pm25,PM$_{2.5}$,ARI effect,0.001972569359674381,0.03131774466118443,0.001972569359674381,$\mu$g m$^{-3}$
+pm25,PM$_{2.5}$,"BC effect
+(no ARI)",0.0,0.0,0.0,$\mu$g m$^{-3}$
+pm25,PM$_{2.5}$,"BC effect
+(ARI)",0.0,0.0,0.0,$\mu$g m$^{-3}$
+swdown,SWDOWN,ARI effect,-4.460086365540832,-4.625541916354253,-4.460086365540832,W m$^{-2}$
+swdown,SWDOWN,"BC effect
+(no ARI)",0.0,0.0,0.0,W m$^{-2}$
+swdown,SWDOWN,"BC effect
+(ARI)",0.0,0.0,0.0,W m$^{-2}$
+pblh,PBLH,ARI effect,-2.935796101887945,-0.4178625175829929,-2.935796101887945,m
+pblh,PBLH,"BC effect
+(no ARI)",0.0,0.0,0.0,m
+pblh,PBLH,"BC effect
+(ARI)",0.0,0.0,0.0,m
+t2,T2,ARI effect,-0.09370295206707624,-0.03466036371168094,-0.09370295206707624,K
+t2,T2,"BC effect
+(no ARI)",0.0,0.0,0.0,K
+t2,T2,"BC effect
+(ARI)",0.0,0.0,0.0,K
+bc1,BC1,ARI effect,-7.022301562959257e-07,-0.010681560363850484,-0.0007022301562959257,$10^{-3}$ model units
+bc1,BC1,"BC effect
+(no ARI)",0.0,0.0,0.0,$10^{-3}$ model units
+bc1,BC1,"BC effect
+(ARI)",0.0,0.0,0.0,$10^{-3}$ model units
