@@ -1,43 +1,66 @@
-# TianJi-Environ
+# 🌏 TianJi-Environ
 
 <div align="center">
 
-### An Autonomous AI Scientist for Atmospheric Environmental Research
+### 🧠 An Autonomous AI Scientist for Atmospheric Environmental Research
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv%20coming%20soon-b31b1b.svg)](#citation)
-[![Artifacts](https://img.shields.io/badge/Artifacts-available-blue.svg)](#repository-structure)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![WRF-Chem](https://img.shields.io/badge/Model-WRF--Chem-orange.svg)](https://ruc.noaa.gov/wrf/wrf-chem/)
+<p>
+  <a href="#-citation"><img src="https://img.shields.io/badge/Paper-arXiv%20coming%20soon-b31b1b.svg" alt="Paper"></a>
+  <a href="#-what-is-in-this-repository"><img src="https://img.shields.io/badge/Artifacts-available-blue.svg" alt="Artifacts"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
+  <a href="https://ruc.noaa.gov/wrf/wrf-chem/"><img src="https://img.shields.io/badge/Model-WRF--Chem-orange.svg" alt="WRF-Chem"></a>
+  <a href="#-reproducibility"><img src="https://img.shields.io/badge/Reproducibility-curated%20artifacts-purple.svg" alt="Reproducibility"></a>
+</p>
 
-Haoluo Zhao, Hongchun Zhang, Nan Li, Jing-Jia Luo, Kaikai Zhang, Mengyang Yu, Nan Chen, Tao Song, and Fan Meng
+**Haoluo Zhao**, **Hongchun Zhang**, **Nan Li**, **Jing-Jia Luo**, **Kaikai Zhang**, **Mengyang Yu**, **Nan Chen**, **Tao Song**, and **Fan Meng**
+
+<p>
+  <a href="#-overview">Overview</a> •
+  <a href="#-what-is-in-this-repository">Artifacts</a> •
+  <a href="#-case-studies">Case Studies</a> •
+  <a href="#-diagnostic-tasks">Diagnostic Tasks</a> •
+  <a href="#-reproducibility">Reproducibility</a> •
+  <a href="#-citation">Citation</a>
+</p>
+
+<sub>
+Curated supporting artifacts for the TianJi-Environ manuscript. Source code and additional reproducibility materials will be released here as the project is prepared for public use.
+</sub>
 
 </div>
 
-## News
+---
+
+## 📰 News
 
 - **2026-06-05**: Initial supporting artifacts released, including manuscript figures, source data, H1/H2 case-study summaries, diagnostic-task examples, and system-trace summaries.
-- Source code and additional reproducibility materials will be released and maintained in this repository as the project is prepared for public use.
+- **Coming soon**: source code, additional documentation, and expanded reproducibility materials will be synchronized in this repository.
 
-## Overview
+## 🔬 Overview
 
-TianJi-Environ is an auditable AI Scientist prototype for atmospheric-chemistry mechanism validation. The system is designed to organize literature evidence, mechanism hypotheses, WRF-Chem branch experiments, diagnostic evidence, and qualified scientific interpretation into a traceable research workflow.
+**TianJi-Environ** is an auditable AI Scientist prototype for atmospheric-chemistry mechanism validation. It is designed to organize literature evidence, mechanism hypotheses, WRF-Chem branch experiments, diagnostic evidence, and qualified scientific interpretation into a traceable research workflow.
 
 The manuscript studies two representative atmospheric-environmental problems:
 
 - **H1: Aerosol-radiation interaction and ozone response** over the North China Plain.
 - **H2: Black-carbon feedback and wintertime PM2.5** over the Guanzhong Basin.
 
-This repository currently hosts curated supporting artifacts rather than a full WRF-Chem runtime environment. It is organized around the manuscript logic so that readers can inspect the evidence chain, figures, summarized branch outputs, diagnostic examples, and system-level traces used in the paper.
+This repository currently hosts **curated supporting artifacts** rather than a full WRF-Chem runtime environment. It follows the manuscript logic so that readers can inspect the evidence chain, figures, summarized branch outputs, diagnostic examples, and system-level traces used in the paper.
 
-![TianJi-Environ research workflow](paper_artifacts/figures/fig01_research_loop.png)
+<p align="center">
+  <img src="paper_artifacts/figures/fig01_research_loop.png" alt="TianJi-Environ research workflow" width="88%">
+</p>
 
-## Contributions
+## ✨ Highlights
 
-- We formulate atmospheric-chemistry mechanism validation as an auditable AI Scientist task grounded in complex numerical modelling.
-- We provide supporting artifacts for a WRF-Chem-based multi-agent workflow that connects mechanism hypotheses, branch experiments, diagnostic evidence, and qualified conclusions.
-- We release curated H1/H2 case-study summaries, manuscript figure source data, diagnostic-task examples, and system-trace artifacts for manuscript-level inspection.
+| Theme | What TianJi-Environ Makes Traceable |
+| --- | --- |
+| 🧪 Mechanism validation | Hypothesis → experiment branches → diagnostics → evidence state → qualified conclusion |
+| 🌦️ Atmospheric modelling | WRF-Chem branch experiments for ozone response and particulate-matter feedback cases |
+| 🧭 Multi-agent research workflow | Literature evidence, experiment organization, model-output diagnosis, and scientific reporting |
+| 📊 Manuscript inspection | Final figures, source-data tables, case summaries, diagnostic examples, and system traces |
 
-## Repository Structure
+## 📦 What Is in This Repository
 
 ```text
 TianJi-Environ/
@@ -68,11 +91,20 @@ TianJi-Environ/
   configs/
 ```
 
-## Case Studies
+| Directory | Contents |
+| --- | --- |
+| `paper_artifacts/` | Manuscript figures and figure-level source-data tables |
+| `case_studies/` | Curated H1/H2 branch tables, sanitized branch-result summaries, and evidence-state notes |
+| `diagnostic_tasks/` | Representative lightweight diagnostic examples and output figures |
+| `system_traces/` | Summarized research-chain, reliability, routing, and handoff artifacts |
+| `scripts/` and `configs/` | Selected scripts and configuration files used to prepare manuscript-facing artifacts |
+| `docs/` | Reproducibility notes, third-party-data notes, and the artifact manifest |
+
+## 🧪 Case Studies
 
 ### H1: Aerosol-Radiation Interaction and Ozone Response
 
-The H1 artifacts summarize a summertime ozone-response case over the North China Plain. The released materials include a branch table, sanitized branch-result summaries, evidence-state notes, and the manuscript-facing diagnostic figures.
+The H1 artifacts summarize a summertime ozone-response case over the North China Plain. The released materials include a branch table, sanitized branch-result summaries, evidence-state notes, and manuscript-facing diagnostic figures.
 
 Key files:
 
@@ -90,21 +122,21 @@ Key files:
 - `case_studies/h2_bc_pm25/evidence_summary.md`
 - `case_studies/h2_bc_pm25/diagnostic_figures/`
 
-## Diagnostic Tasks
+## 📊 Diagnostic Tasks
 
-The `diagnostic_tasks/` directory contains representative lightweight diagnostic examples used to evaluate model-output post-processing and scientific diagnosis. The released tasks cover:
+The `diagnostic_tasks/` directory contains representative lightweight diagnostic examples used to inspect model-output post-processing and scientific diagnosis. The released tasks cover:
 
-- MDA8 O3 peak identification.
-- PM2.5 episode diagnosis.
-- O3-meteorology covariation analysis.
+- **SA-01**: MDA8 O3 peak identification.
+- **SA-03**: PM2.5 episode diagnosis.
+- **SA-05**: O3-meteorology covariation analysis.
 
 Each task directory contains a manuscript-facing output figure. Summary scores are provided only as diagnostic-task metadata and should not be interpreted as independent scientific validation of the atmospheric mechanisms.
 
-## System Traces
+## 🧭 System Traces
 
-The `system_traces/` directory provides summarized artifacts for inspecting research-action reliability, routing/handoff behavior, and the traceable research chain. These artifacts support system-level analysis in the manuscript and are not intended to replace scientific evidence from the WRF-Chem branch experiments.
+The `system_traces/` directory provides summarized artifacts for inspecting research-action reliability, routing/handoff behavior, and the traceable research chain. These artifacts support system-level analysis in the manuscript and are not intended to replace scientific evidence from WRF-Chem branch experiments.
 
-## Reproducibility
+## 🔁 Reproducibility
 
 The current release supports three levels of inspection:
 
@@ -118,13 +150,13 @@ See:
 - `docs/third_party_data.md`
 - `docs/artifact_manifest.csv`
 
-## What Is Not Included
+## 🚧 What Is Not Included
 
-This repository does not redistribute WRF-Chem, WRF/WPS, meteorological input archives, emissions inventories, observation products, raw model output files, private run directories, platform-specific logs, credentials, or data governed by third-party access restrictions.
+This repository does **not** redistribute WRF-Chem, WRF/WPS, meteorological input archives, emissions inventories, observation products, raw model output files, private run directories, platform-specific logs, credentials, or data governed by third-party access restrictions.
 
 The released branch-result files are sanitized summaries prepared for manuscript-level inspection. Platform-specific paths and private execution-environment details have been removed.
 
-## Citation
+## 📚 Citation
 
 If you use these artifacts, please cite the TianJi-Environ manuscript. Citation metadata is provided in `CITATION.cff`.
 
@@ -137,6 +169,6 @@ If you use these artifacts, please cite the TianJi-Environ manuscript. Citation 
 }
 ```
 
-## License and Notice
+## 📄 License and Notice
 
 Released documentation and scripts are provided under the MIT License unless otherwise noted. Third-party models, data products, and external software retain their own licenses and access terms. See `NOTICE.md` for details.
