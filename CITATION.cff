@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "TianJi-Environ: An Autonomous AI Scientist for Atmospheric Environmental Research"
-message: "If you use these artifacts, please cite the TianJi-Environ manuscript."
+message: "If you use these artifacts, please cite the TianJi-Environ arXiv preprint and this repository."
 type: software
 authors:
   - family-names: Zhao
@@ -22,5 +22,32 @@ authors:
   - family-names: Meng
     given-names: Fan
 repository-code: "https://github.com/zwww-www/TianJi-Environ"
+url: "https://arxiv.org/abs/2606.07697"
+doi: "10.48550/arXiv.2606.07697"
 date-released: "2026-06-05"
 license: MIT
+preferred-citation:
+  type: article
+  title: "TianJi-Environ: An Autonomous AI Scientist for Atmospheric Environmental Research"
+  authors:
+    - family-names: Zhao
+      given-names: Haoluo
+    - family-names: Zhang
+      given-names: Hongchun
+    - family-names: Li
+      given-names: Nan
+    - family-names: Luo
+      given-names: Jing-Jia
+    - family-names: Zhang
+      given-names: Kaikai
+    - family-names: Yu
+      given-names: Mengyang
+    - family-names: Chen
+      given-names: Nan
+    - family-names: Song
+      given-names: Tao
+    - family-names: Meng
+      given-names: Fan
+  year: 2026
+  doi: "10.48550/arXiv.2606.07697"
+  url: "https://arxiv.org/abs/2606.07697"
