@@ -5,7 +5,7 @@
 ### 🧠 An Autonomous AI Scientist for Atmospheric Environmental Research
 
 <p>
-  <a href="#-citation"><img src="https://img.shields.io/badge/Paper-arXiv%20coming%20soon-b31b1b.svg" alt="Paper"></a>
+  <a href="https://arxiv.org/abs/2606.07697"><img src="https://img.shields.io/badge/arXiv-2606.07697-b31b1b.svg" alt="arXiv"></a>
   <a href="#-what-is-in-this-repository"><img src="https://img.shields.io/badge/Artifacts-available-blue.svg" alt="Artifacts"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
   <a href="https://ruc.noaa.gov/wrf/wrf-chem/"><img src="https://img.shields.io/badge/Model-WRF--Chem-orange.svg" alt="WRF-Chem"></a>
@@ -24,7 +24,7 @@
 </p>
 
 <sub>
-Curated supporting artifacts for the TianJi-Environ manuscript. Source code and additional reproducibility materials will be released here as the project is prepared for public use.
+Curated supporting artifacts for the TianJi-Environ manuscript. The arXiv preprint is available at <a href="https://arxiv.org/abs/2606.07697">arXiv:2606.07697</a>.
 </sub>
 
 </div>
@@ -34,6 +34,7 @@ Curated supporting artifacts for the TianJi-Environ manuscript. Source code and 
 ## 📰 News
 
 - **2026-06-05**: Initial supporting artifacts released, including manuscript figures, source data, H1/H2 case-study summaries, diagnostic-task examples, and system-trace summaries.
+- **2026-06-05**: The TianJi-Environ preprint is available on arXiv: [arXiv:2606.07697](https://arxiv.org/abs/2606.07697).
 - **Coming soon**: source code, additional documentation, and expanded reproducibility materials will be synchronized in this repository.
 
 ## 🔬 Overview
@@ -158,14 +159,17 @@ The released branch-result files are sanitized summaries prepared for manuscript
 
 ## 📚 Citation
 
-If you use these artifacts, please cite the TianJi-Environ manuscript. Citation metadata is provided in `CITATION.cff`.
+If you use these artifacts, please cite the TianJi-Environ arXiv preprint. Citation metadata is provided in `CITATION.cff`.
 
 ```bibtex
 @misc{zhao2026tianjienviron,
   title  = {TianJi-Environ: An Autonomous AI Scientist for Atmospheric Environmental Research},
   author = {Zhao, Haoluo and Zhang, Hongchun and Li, Nan and Luo, Jing-Jia and Zhang, Kaikai and Yu, Mengyang and Chen, Nan and Song, Tao and Meng, Fan},
   year   = {2026},
-  note   = {Manuscript and supporting artifacts}
+  eprint = {2606.07697},
+  archivePrefix = {arXiv},
+  doi    = {10.48550/arXiv.2606.07697},
+  url    = {https://arxiv.org/abs/2606.07697}
 }
 ```
 
